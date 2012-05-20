@@ -1,0 +1,73 @@
+Mathematical model to predict MVPs from 1970 onwards:
+Takes in to account individual statistics and team record
+
+> mvpmodel
+
+Call:  glm(formula = MVP ~ GAMES + PPG + RPG + APG + SPG + BPG + WINPCT, 
+    family = binomial(link = "logit"))
+
+Coefficients:
+(Intercept)        GAMES          PPG          RPG          APG          SPG          BPG       WINPCT  
+ -32.919831     0.004281     0.369791     0.365068     0.541685     0.364045     0.505713    19.610476  
+
+Degrees of Freedom: 16611 Total (i.e. Null);  16604 Residual
+Null Deviance:      562.2 
+Residual Deviance: 158.2  AIC: 174.2 
+> 
+
+Top 10 Most powerful MVP-esque seasons
+Kareem Abdul-jabbar 1971 81 34.83950617 16.61728395  4.56790123 0.00000000 0.00000000 0.57404656 0.7682927   1 9.805001e-01
+Shaquille O'neal 1999 79 29.67088608 13.64556962  3.78481013 0.45569620 3.02531646 0.57417417 0.8170732   1 9.585589e-01
+Artis Gilmore 1971  84 23.84523810 17.75000000  2.73809524 0.00000000 5.02380952 0.59792285 0.8095238   0 9.331693e-01
+Kareem Abdul-jabbar 1970  82 31.65853659 15.98780488  3.31707317 0.00000000 0.00000000 0.57677699 0.8048780   1 9.279581e-01
+Larry Bird 1984 80 28.68750000 10.52500000  6.63750000 1.61250000 1.22500000 0.52159091 0.7682927   1 8.509291e-01
+Kareem Abdul-jabbar 1973  81 27.04938272 14.54320988  4.76543210 1.38271605 3.49382716 0.53894258 0.7195122   1 8.455859e-01
+Michael Jordan 1995    82 30.37804878  6.62195122  4.29268293 2.19512195 0.51219512 0.49513514 0.8780488   1 8.435103e-01
+LeBron James 2008    81 28.44444444  7.56790123  7.24691358 1.69135802 1.14814815 0.48915065 0.8048780   1 8.339901e-01
+Magic Johnson 1986    80 23.86250000  6.30000000 12.21250000 1.72500000 0.45000000 0.52217125 0.7926829   1 8.267087e-01
+Michael Jordan 1991    80 30.05000000  6.38750000  6.11250000 2.27500000 0.93750000 0.51870187 0.8170732   1 8.180643e-01
+
+Artis Gilmore was the only one of the top 10 to not actually win the MVP. Tough competition from Kareem obviously, but you gotta respect those numbers! 24 pts 18 boards 5 blocks on 60% shooting on a team that one over 80% of their games, sick!
+
+YEAR  ACTUAL_MVP      MODEL_PREDICTED_MVP
+1970  Kareem          Kareem
+1971  Kareem          Kareem
+1972  Dave Cowens     Kareem  
+1973  Kareem          Kareem
+1974  Bob Mcadoo      Julius Erving
+1975  Kareem          Julius Erving
+1976  Kareem          Kareem
+1977  Bill Walton     Bill Walton
+1978  Moses Malone    Kareem
+1979  Kareem          Kareem
+1980  Julius Erving   Julius Erving
+1981  Moses Malone    Larry Bird
+1982  Moses Malone    Moses Malone
+1983  Larry Bird      Larry Bird
+1984  Larry Bird      Larry Bird
+1985  Larry Bird      Larry Bird
+1986  Magic Johnson   Magic Johnson
+1987  Michael Jordan  Larry Bird
+1988  Magic Johnson   Magic Johnson
+1989  Magic Johnson   Michael Jordan
+1990  Michael Jordan  Michael Jordan
+1991  Michael Jordan  Michael Jordan
+1992  Charles Barkley Charles Barkley
+1993  Olajuwon        David Robinson
+1994  David Robinson  David Robinson
+1995  Michael Jordan  Michael Jordan
+1996  Karl Malone     Michael Jordan
+1997  Michael Jordan  Shaq
+1998  Karl Malone     Karl Malone
+1999  Shaq            Shaq
+2000  Iverson         Shaq
+2001  Tim Duncan      Tim Duncan
+2002  Tim Duncan      Tim Duncan
+2003  Kevin Garnett   Kevin Garnett 
+2004  Steve Nash      Dirk Nowitzki
+2005  Steve Nash      Lebron James
+2006  Dirk Nowitzki   Dirk Nowitzki
+2007  Kobe Bryant     Kobe Bryant
+2008  Lebron James    Lebron James
+2009  Lebron James    Lebron James
+
