@@ -3,11 +3,99 @@
 <html>
 
 <head>
+<script src="http://d3js.org/d3.v2.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script src="trade_data.js"></script>
 <title>Trade viz</title>
+
+<script type="text/javascript">
+var start_date = "2009";
+var end_date = "2012";
+
+var matrix = [];
+
+var teams = ['Celtics', 'Nets', 'Knicks', '76ers', 'Raptors',
+  'Bulls', 'Cavaliers', 'Pistons', 'Pacers', 'Bucks',
+  'Hawks', 'Bobcats', 'Heat', 'Magic', 'Wizards',
+  'Mavericks', 'Rockets', 'Grizzlies', 'Hornets', 'Spurs',
+  'Nuggets', 'Timberwolves', 'Blazers', 'Thunder', 'Jazz',
+  'Warriors', 'Clippers', 'Lakers', 'Suns', 'Kings'];
+
+function generate_matrix()
+{
+  // MAKE HEADER
+  var row = [];
+  row.push('TEAM')
+  for (var i=0; i<teams.length; i++ )
+  {
+    row.push(teams[i]);
+  }
+  matrix.push(row);
+  
+  //build each row
+  for ( var i =0; i<teams.length; i++)
+  {
+    row = [];
+    row.push(teams[i]);
+    for ( var q=0; q<teams.length; q++)
+    {
+      num_trades = 0;
+      for (d = parseInt(start_date); d<=parseInt(end_date); d++)
+      {
+        try
+        {
+          n = trade_data[d + ''][teams[i].toLowerCase()][teams[q].toLowerCase()];
+
+          if (typeof n === "undefined")
+          {
+            n=0;
+          }
+        
+          num_trades = num_trades + n; 
+        }
+        catch(err){}
+      }
+      row.push(num_trades);
+    }
+    matrix.push(row);
+  }
+}
+
+$(document).ready(function(){
+
+generate_matrix();
+
+  var scale = d3.scale.linear().domain([0,7]).range(["white","red"]);
+
+d3.select("#viz")
+    .append("table")
+    .style("border-collapse", "collapse")
+    .style("border", "2px black solid")
+    
+    .selectAll("tr")
+    .data(matrix)
+    .enter().append("tr")   
+    .selectAll("td")
+    .data(function(d){return d;})
+    .enter().append("td")
+    .style("border", "1px black solid")
+    .style("height", "30px")
+    .style("width", "30px")
+    .style("background-color", function(d){ 
+      return scale(d);})
+    .text(function(d){return d;})
+    .style("font-size", "9px");
+  });
+</script>
+
 </head>
 
 <body>
 <h3>Visualization of trading relationships between teams</h3>
+
+<div id="viz">
+
+</div>
 </body>
 
 </html>
